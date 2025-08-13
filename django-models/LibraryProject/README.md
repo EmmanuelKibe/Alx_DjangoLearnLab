@@ -1,0 +1,1 @@
+This project is a foundational Django application designed to manage library resources. It serves as a learning exercise for Django web development in the ALX program.
