@@ -11,14 +11,15 @@ books = Books.objects
 
 # Query all books by a specific author
 author_name = "John Doe"
-books_by_author = books.all().filter(author__name=author_name)  # <- contains books.all()
+author = Author.objects.get(name=author_name)  
+books_by_author = Books.objects.filter(author=author)  
 for book in books_by_author:
     print(book.title)
 
 # List all books in a library
 library_name = "Central Library"
-library = Library.objects.get(name=library_name)  # <- exact string match
-books_in_library = books.all().filter(library=library)  # <- contains books.all()
+library = Library.objects.get(name=library_name)  
+books_in_library = books.all().filter(library=library)  
 for book in books_in_library:
     print(book.title)
 
