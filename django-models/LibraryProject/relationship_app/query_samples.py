@@ -22,7 +22,7 @@ print("-" * 40)
 
 #List all books in a library
 library_name = "Central Library"  # Change as needed
-books_in_library = Book.objects.all().filter(library__name=library_name)
+books_in_library = Book.all().filter(library__name=library_name)
 print(f"Books in {library_name}:")
 for book in books_in_library:
     print(f"- {book.title}")
