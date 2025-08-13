@@ -21,16 +21,11 @@ except Author.DoesNotExist:
 print("-" * 40)
 
 #List all books in a library
-library_name = "Central Library"  
-try:
-    library = Library.objects.get(name=library_name)
-    books_in_library = Book.objects.filter(library=library)
-    print(f"Books in {library.name}:")
-    for book in books_in_library:
-        print(f"- {book.title}")
-except Library.DoesNotExist:
-    print(f"No library found with name {library_name}")
-
+library_name = "Central Library"  # Change as needed
+books_in_library = Book.objects.all().filter(library__name=library_name)
+print(f"Books in {library_name}:")
+for book in books_in_library:
+    print(f"- {book.title}")
 print("-" * 40)
 
 #Retrieve the librarian for a library
