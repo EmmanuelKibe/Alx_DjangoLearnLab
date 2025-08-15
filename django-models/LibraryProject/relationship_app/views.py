@@ -68,8 +68,8 @@ def is_member(user):
     return hasattr(user, 'userprofile') and user.userprofile.role == 'Member'
 
 @user_passes_test(is_admin)
-def Admin(request):
-    return render(request, 'relationship_app/admin_view.html')
+def admin_view(request):
+    return render(request, 'admin_view.html')
 
 @user_passes_test(is_librarian)
 def librarian_view(request):
