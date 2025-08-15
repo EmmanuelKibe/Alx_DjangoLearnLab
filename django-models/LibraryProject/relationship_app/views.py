@@ -1,7 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.detail import DetailView
 from .models import Library
 from .models import Book
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 # Function-based view — lists all books
 def list_books(request):
@@ -20,3 +23,35 @@ class LibraryDetailView(DetailView):
         context['books'] = self.object.books.all()
         return context
 
+# User registration
+def register_view(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Log in the user after registration
+            return redirect("list_books")  # Change to your desired page
+    else:
+        form = UserCreationForm()
+    return render(request, "relationship_app/register.html", {"form": form})
+
+# User login
+def login_view(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect("list_books")  # Change to your desired page
+    else:
+        form = AuthenticationForm()
+    return render(request, "relationship_app/login.html", {"form": form})
+
+# User logout
+@login_required
+def logout_view(request):
+    logout(request)
+    return render(request, "relationship_app/logout.html")
