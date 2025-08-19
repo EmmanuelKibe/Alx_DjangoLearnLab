@@ -10,3 +10,11 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Comment(models.Model):
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    flagged = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.text[:30]
