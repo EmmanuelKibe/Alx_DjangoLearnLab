@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product
+from .models import Product, Comment
 from django.utils import timezone
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -13,3 +13,8 @@ class ProductSerializer(serializers.ModelSerializer):
         # obj is the Book instance
         delta = timezone.now() - obj.created_at
         return delta.days
+    
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'
