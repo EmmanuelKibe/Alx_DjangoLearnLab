@@ -9,5 +9,5 @@ router.register(r'comments', CommentViewSet)
 
 urlpatterns = [
     path('products/', ProductListCreateAPIView.as_view(), name='product-list-create'),
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]
