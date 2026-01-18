@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import user_passes_test
 # Function-based view — lists all books
 def list_books(request):
     books = Book.objects.all()
-    return render(request, 'relationship_app/list_books.html', {'books': books})
+    return render(request, 'relationship_app/templates/list_books.html', {'books': books})
 
 # Class-based view — shows details for a specific library
 class LibraryDetailView(DetailView):
@@ -35,7 +35,7 @@ def register_view(request):
             return redirect("list_books")  # Change to your desired page
     else:
         form = UserCreationForm()
-    return render(request, "relationship_app/register.html", {"form": form})
+    return render(request, "relationship_app/templates/register.html", {"form": form})
 
 # User login
 def login_view(request):
